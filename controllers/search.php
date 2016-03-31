@@ -15,7 +15,7 @@ class Search extends CI_Controller {
 		$this->load->helper('url');
 	}
 
-
+//My comment is clean
 
 }
 //end of class
