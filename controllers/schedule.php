@@ -23,11 +23,16 @@ class Schedule extends CI_Controller {
 		}
 		else {
 			//put any data into data array for view
-			$data['title'] = "Welcome to the University Registration System";
-	
+			$data['title'] = "University Registration System";
+			
+			//get user information
+			$usernameArray = array ('username' => $valid);
+			$result = $this->schedule_model->getPersonalInfo($usernameArray);
+			print_r($result);
+			
 			//load views
 			$this->load->view('templates/header', $data);
-			$this->load->view('welcome',$data);
+			$this->load->view('schedule_page',$data);
 			$this->load->view('templates/footer', $data);
 			
 			//	COMMENT OUT ABOVE
