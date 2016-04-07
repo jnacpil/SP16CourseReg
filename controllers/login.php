@@ -9,12 +9,15 @@ class Login extends CI_Controller {
 		$this->load->library('encrypt');
 		//load session
 		$this->load->library('session');
+		//load user
+		//$this->load->library('UserImpl');
 		//load models
 		$this->load->model('login_model');
 		//load helper
 		$this->load->helper('url');
-		//admin access
-		//username:"jsmith"
+		//access
+		//username:"jsmith" => ADMIN
+		//		   "pnavarro" => STUDENT
 		//password:"qwerty"
 	}
 		
@@ -41,7 +44,11 @@ class Login extends CI_Controller {
 			if($this->isResultNotEmpty($result)) {
 				if($this->doPasswordsMatch($result, $password)) {
 					//set session array for logged in check
-					$createLoggedInSuccessfulArray = array('loggedIn' => $username);
+					$userid = $result['user_id'];
+					$accessLevel = $result['access_id'];
+					$result2 = $this->login_model->getUserSpecificInfo($userid,$accessLevel);
+					$loggedInUser = $this->createUser($result,$result2);
+					$createLoggedInSuccessfulArray = array('userInfoObject' => $loggedInUser);
 					$this->session->set_userdata($createLoggedInSuccessfulArray);	
 					redirect('schedule/home');
 				}
@@ -118,6 +125,27 @@ class Login extends CI_Controller {
 	private function createMutedMessage($text) {
 		$message = "<p class='text-muted'> Logged Out! </p>";
 		return $message;
+	}
+	
+	private function createUser($userInfoArray,$userInfoArray2) {
+		$userid = $userInfoArray['user_id'];
+		$theFirstName = $userInfoArray['user_firstName'];
+		$theLastName = $userInfoArray['user_lastName'];
+		$theEmail = $userInfoArray['user_email'];
+		$theUsername = $userInfoArray['user_username'];
+		$thePassword = $userInfoArray['user_password'];
+		$theMajor = $userInfoArray2['major_string'];
+		$theClassification = $userInfoArray2['class_string'];
+		$theSchool = "";
+		$theRank = "";
+		$theAccessLevel = $userInfoArray['access_id'];
+		//$user = new UserImpl($theFirstName, $theLastName, $theEmail, $theUsername, $thePassword, $theMajor, $theClassification, $theSchool, $theRank, $theAccessLevel);
+		
+		$user = array ('user_firstName' => $userInfoArray['user_firstName'], 'user_lastName' => $userInfoArray['user_lastName'], 'user_email' => $userInfoArray['user_email'], 'user_username' => $userInfoArray['user_username'], 'user_password' => $userInfoArray['user_password'], 'major_string' => $userInfoArray2['major_string'], 'class_string' => $userInfoArray2['class_string'], 'access_id' => $userInfoArray['access_id'], 'user_id' => $userInfoArray['user_id']);
+		
+		//$user2 = $this->load->library('UserImpl',$user);
+	
+		return $user;
 	}		
 }
 //end of class
