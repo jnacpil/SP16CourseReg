@@ -1,0 +1,330 @@
+-- MySQL dump 10.13  Distrib 5.5.45, for Linux (x86_64)
+--
+-- Host: localhost    Database: jmcconvc_3339_Uni_Sys
+-- ------------------------------------------------------
+-- Server version	5.5.45-cll-lve
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `AccessLevel`
+--
+
+DROP TABLE IF EXISTS `AccessLevel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `AccessLevel` (
+  `access_id` tinyint(3) unsigned NOT NULL,
+  `access_string` varchar(15) NOT NULL,
+  PRIMARY KEY (`access_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AccessLevel`
+--
+
+LOCK TABLES `AccessLevel` WRITE;
+/*!40000 ALTER TABLE `AccessLevel` DISABLE KEYS */;
+INSERT INTO `AccessLevel` VALUES (10,'Student'),(20,'Professor'),(30,'Registrar'),(99,'Administrator');
+/*!40000 ALTER TABLE `AccessLevel` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Attend`
+--
+
+DROP TABLE IF EXISTS `Attend`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Attend` (
+  `att_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sect_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`att_id`),
+  KEY `user_id` (`user_id`),
+  KEY `sect_id` (`sect_id`),
+  CONSTRAINT `Attend_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON UPDATE CASCADE,
+  CONSTRAINT `Attend_ibfk_2` FOREIGN KEY (`sect_id`) REFERENCES `Section` (`sect_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Attend`
+--
+
+LOCK TABLES `Attend` WRITE;
+/*!40000 ALTER TABLE `Attend` DISABLE KEYS */;
+INSERT INTO `Attend` VALUES (1,1,2),(2,3,2),(3,2,2);
+/*!40000 ALTER TABLE `Attend` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Classification`
+--
+
+DROP TABLE IF EXISTS `Classification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Classification` (
+  `class_id` tinyint(3) unsigned NOT NULL,
+  `class_string` varchar(15) NOT NULL,
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Classification`
+--
+
+LOCK TABLES `Classification` WRITE;
+/*!40000 ALTER TABLE `Classification` DISABLE KEYS */;
+INSERT INTO `Classification` VALUES (1,'Freshman'),(2,'Sophomore'),(3,'Junior'),(4,'Senior');
+/*!40000 ALTER TABLE `Classification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Course`
+--
+
+DROP TABLE IF EXISTS `Course`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Course` (
+  `course_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `course_name` varchar(30) NOT NULL,
+  `course_number` varchar(4) NOT NULL,
+  `course_descript` text NOT NULL,
+  `dept_id` varchar(6) NOT NULL,
+  PRIMARY KEY (`course_id`),
+  KEY `dept_id` (`dept_id`),
+  CONSTRAINT `Course_ibfk_1` FOREIGN KEY (`dept_id`) REFERENCES `Department` (`dept_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Course`
+--
+
+LOCK TABLES `Course` WRITE;
+/*!40000 ALTER TABLE `Course` DISABLE KEYS */;
+INSERT INTO `Course` VALUES (1,'Software Engineering I','3339','Project-based course that teaches students to work in groups on building their own software.','1'),(2,'Database Theory','3337','Focuses on concepts that include all aspects of a database.','1'),(3,'Web Programming','2328','Focuses on the fundamentals of web-based programming and design.','1');
+/*!40000 ALTER TABLE `Course` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Department`
+--
+
+DROP TABLE IF EXISTS `Department`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Department` (
+  `dept_id` varchar(6) NOT NULL,
+  `dept_name` varchar(25) NOT NULL,
+  PRIMARY KEY (`dept_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Department`
+--
+
+LOCK TABLES `Department` WRITE;
+/*!40000 ALTER TABLE `Department` DISABLE KEYS */;
+INSERT INTO `Department` VALUES ('1','COSC'),('2','CULF'),('3','BUSI');
+/*!40000 ALTER TABLE `Department` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Major`
+--
+
+DROP TABLE IF EXISTS `Major`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Major` (
+  `major_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `major_string` varchar(35) NOT NULL,
+  PRIMARY KEY (`major_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Major`
+--
+
+LOCK TABLES `Major` WRITE;
+/*!40000 ALTER TABLE `Major` DISABLE KEYS */;
+INSERT INTO `Major` VALUES (1,'Undeclared'),(2,'Business'),(3,'Interactive Game Studies'),(4,'Bioinformatics'),(5,'Mathematics'),(6,'Computer Science');
+/*!40000 ALTER TABLE `Major` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Section`
+--
+
+DROP TABLE IF EXISTS `Section`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Section` (
+  `sect_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sect_num` tinyint(3) unsigned NOT NULL,
+  `tp_id` int(10) unsigned NOT NULL,
+  `ts_id` bigint(20) unsigned NOT NULL,
+  `course_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`sect_id`),
+  KEY `tp_id` (`tp_id`),
+  KEY `ts_id` (`ts_id`),
+  KEY `course_id` (`course_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `Section_ibfk_5` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON UPDATE CASCADE,
+  CONSTRAINT `Section_ibfk_1` FOREIGN KEY (`tp_id`) REFERENCES `TimePeriod` (`tp_id`) ON UPDATE CASCADE,
+  CONSTRAINT `Section_ibfk_2` FOREIGN KEY (`ts_id`) REFERENCES `TimeSlot` (`ts_id`) ON UPDATE CASCADE,
+  CONSTRAINT `Section_ibfk_3` FOREIGN KEY (`course_id`) REFERENCES `Course` (`course_id`) ON UPDATE CASCADE,
+  CONSTRAINT `Section_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Section`
+--
+
+LOCK TABLES `Section` WRITE;
+/*!40000 ALTER TABLE `Section` DISABLE KEYS */;
+INSERT INTO `Section` VALUES (1,1,1,1,1,3),(2,1,1,2,2,3),(3,1,1,3,3,3);
+/*!40000 ALTER TABLE `Section` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Student`
+--
+
+DROP TABLE IF EXISTS `Student`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Student` (
+  `user_id` bigint(20) unsigned NOT NULL,
+  `major_id` bigint(20) unsigned NOT NULL,
+  `class_id` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `major_id` (`major_id`),
+  KEY `class_id` (`class_id`),
+  CONSTRAINT `Student_ibfk_3` FOREIGN KEY (`major_id`) REFERENCES `Major` (`major_id`) ON UPDATE CASCADE,
+  CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`) ON UPDATE CASCADE,
+  CONSTRAINT `Student_ibfk_2` FOREIGN KEY (`class_id`) REFERENCES `Classification` (`class_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Student`
+--
+
+LOCK TABLES `Student` WRITE;
+/*!40000 ALTER TABLE `Student` DISABLE KEYS */;
+INSERT INTO `Student` VALUES (2,6,3),(5,5,4),(6,3,2);
+/*!40000 ALTER TABLE `Student` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `TimePeriod`
+--
+
+DROP TABLE IF EXISTS `TimePeriod`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TimePeriod` (
+  `tp_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tp_name` enum('Fall','Spring','Summer') DEFAULT NULL,
+  `tp_year` varchar(4) NOT NULL,
+  PRIMARY KEY (`tp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `TimePeriod`
+--
+
+LOCK TABLES `TimePeriod` WRITE;
+/*!40000 ALTER TABLE `TimePeriod` DISABLE KEYS */;
+INSERT INTO `TimePeriod` VALUES (1,'Spring','2016'),(2,'Fall','2016'),(3,'Summer','2016'),(4,'Spring','2017'),(5,'Fall','2017'),(6,'Summer','2017');
+/*!40000 ALTER TABLE `TimePeriod` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `TimeSlot`
+--
+
+DROP TABLE IF EXISTS `TimeSlot`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TimeSlot` (
+  `ts_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `ts_daysOfWeek` enum('MWF','TTH','MW') DEFAULT NULL,
+  `ts_timeStart` time NOT NULL,
+  `ts_timeEnd` time NOT NULL,
+  PRIMARY KEY (`ts_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `TimeSlot`
+--
+
+LOCK TABLES `TimeSlot` WRITE;
+/*!40000 ALTER TABLE `TimeSlot` DISABLE KEYS */;
+INSERT INTO `TimeSlot` VALUES (1,'MWF','09:00:00','09:50:00'),(2,'MWF','10:00:00','10:50:00'),(3,'MWF','11:00:00','11:50:00'),(4,'MWF','12:00:00','12:50:00'),(5,'MWF','13:00:00','13:50:00'),(6,'MWF','14:00:00','14:50:00'),(7,'TTH','09:00:00','10:15:00'),(8,'TTH','10:30:00','11:45:00'),(9,'TTH','12:00:00','13:15:00'),(10,'TTH','13:30:00','14:45:00'),(11,'TTH','15:00:00','16:15:00'),(12,'MW','15:00:00','16:15:00'),(13,'MW','16:30:00','17:45:00');
+/*!40000 ALTER TABLE `TimeSlot` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `User`
+--
+
+DROP TABLE IF EXISTS `User`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `User` (
+  `user_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_firstName` varchar(15) NOT NULL,
+  `user_lastName` varchar(25) NOT NULL,
+  `user_email` varchar(30) NOT NULL,
+  `user_username` varchar(20) NOT NULL,
+  `user_password` text NOT NULL,
+  `access_id` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `access_id` (`access_id`),
+  CONSTRAINT `User_ibfk_1` FOREIGN KEY (`access_id`) REFERENCES `AccessLevel` (`access_id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES (1,'John','Smith','jsmith@stedwards.edu','jsmith','tMU32KdXRVZPR8N9mn7V7O/zvz5xgqM2fu41EO8tlRAJmh47Ugg8lU8okw09twDSAN+T7fff3MTqxtzoc3fw3Q==',99),(2,'Patrick','Navarro','pnavarro@stedwards.edu','pnavarro','tMU32KdXRVZPR8N9mn7V7O/zvz5xgqM2fu41EO8tlRAJmh47Ugg8lU8okw09twDSAN+T7fff3MTqxtzoc3fw3Q==',10),(3,'Gage','Smith','gsmith@stedwards.edu','gsmith','',20),(4,'Jefferson','Baltic','jbalt@stedwards.edu','jbalt','',30),(5,'Rick','James','rjames@stedwards.edu','rjames','',10),(6,'Jack','Daniel','jdaniel@stedwards.edu','jdaniel','',10);
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-04-12 12:32:36

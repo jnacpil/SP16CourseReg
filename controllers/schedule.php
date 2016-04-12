@@ -17,7 +17,7 @@ class Schedule extends CI_Controller {
 		
 	public function home() {
 		//logged in check
-		$valid = $this->session->userdata('loggedIn');
+		$valid = $this->session->userdata('userInfoObject');
 		if (!$valid) {
 			redirect('/login/initialize');
 		}
@@ -26,10 +26,17 @@ class Schedule extends CI_Controller {
 			$data['title'] = "University Registration System";
 			
 			//get user information
-			$usernameArray = array ('username' => $valid);
-			$result = $this->schedule_model->getPersonalInfo($usernameArray);
+			//$usernameArray = array ('username' => $valid);
+			//$result = $this->schedule_model->getPersonalInfo($usernameArray);
+			print_r($valid);
+			
+			//get current schedule
+			$id = $valid['user_id'];
+			$result = $this->schedule_model->getStudentCurrentSched($id);
 			print_r($result);
 			
+			$data['userInfo'] = $valid;
+			$data['courseInfo'] = $result;
 			//load views
 			$this->load->view('templates/header', $data);
 			$this->load->view('schedule_page',$data);

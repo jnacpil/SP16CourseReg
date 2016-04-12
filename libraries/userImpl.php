@@ -2,7 +2,7 @@
 
 //UserImpl.php
 
-require_once "User.php"
+require_once "User.php";
 
 class UserImpl implements User {
 
@@ -99,5 +99,7 @@ return $this->school;
 public function getAccessLevel()
 {
 return $this->accessLevel;
+}
+
 }
 ?>

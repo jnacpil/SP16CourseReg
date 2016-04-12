@@ -48,5 +48,5 @@ public function getSchool();
 //Post: rv == The Access Level of the User
 public function getAccessLevel();
 
-
+}
 ?>
