@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		//load helper
 		$this->load->helper('url');
 		//load unit tests
-		$this->load->library('unit_test');
+		// $this->load->library('unit_test');
 		//admin access
 		//username:"jsmith"
 		//password:"qwerty"
@@ -71,13 +71,13 @@ class Login extends CI_Controller {
 		$this->load->view('templates/footer', $data);
 	}
 	
-	public function testing()
-	{
-	$test = $this->input->post('loginFormUsername')
-	$expected_result = "Jefferson";
-	$test_name = "Input field testing";
-	echo $this->unit->run($test, $expected_result);
-	}
+	// public function testing()
+// 	{
+// 		$test = $this->input->post('loginFormUsername');
+// 		$expected_result = "Jefferson";
+// 		$test_name = "Input field testing";
+// 		echo $this->unit->run($test, $expected_result);
+// 	}
 	
 	private function reinitialize($userCredentialsArray){
 		//create an error message
