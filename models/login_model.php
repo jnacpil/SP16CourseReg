@@ -46,6 +46,29 @@ class Login_model extends CI_Model {
 		}
 		if($accessLevel == 20) {
 			//get prof info	
+			//create array to query for username match
+			$usernameArray = array('user_id' => $userid);
+			//run query
+			$query = $this->db->get_where('Instructor', $usernameArray);
+			//just get row and return
+			$row = $query->row_array();
+			
+			//get school
+			$schoolArray = array('school_id' => $row['school_id']);
+			//run query
+			$query2 = $this->db->get_where('School', $schoolArray);
+			//just get row nad return
+			$row2 = $query2->row_array();
+			
+			//get Rank
+			$rankArray = array('rank_id' => $row['rank_id']);
+			//run query
+			$query3 = $this->db->get_where('Rank', $rankArray);
+			//just get row nad return
+			$row3 = $query3->row_array();
+			
+			$result = array ('school_string' => $row3['school_string'], 'rank_string' => $row2['rank_string']);
+
 		}
 		return $result;
 	}

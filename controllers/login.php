@@ -15,16 +15,9 @@ class Login extends CI_Controller {
 		$this->load->model('login_model');
 		//load helper
 		$this->load->helper('url');
-<<<<<<< HEAD
 		//access
 		//username:"jsmith" => ADMIN
 		//		   "pnavarro" => STUDENT
-=======
-		//load unit tests
-		$this->load->library('unit_test');
-		//admin access
-		//username:"jsmith"
->>>>>>> 8df3f7ed681408cdcd2ba127beec918335600253
 		//password:"qwerty"
 	}
 		
@@ -81,14 +74,6 @@ class Login extends CI_Controller {
 		$this->load->view('templates/header', $data);
 		$this->load->view('login_page',$data);
 		$this->load->view('templates/footer', $data);
-	}
-	
-	public function testing()
-	{
-	$test = $this->input->post('loginFormUsername')
-	$expected_result = "Jefferson";
-	$test_name = "Input field testing";
-	echo $this->unit->run($test, $expected_result);
 	}
 	
 	private function reinitialize($userCredentialsArray){
@@ -149,14 +134,23 @@ class Login extends CI_Controller {
 		$theEmail = $userInfoArray['user_email'];
 		$theUsername = $userInfoArray['user_username'];
 		$thePassword = $userInfoArray['user_password'];
-		$theMajor = $userInfoArray2['major_string'];
-		$theClassification = $userInfoArray2['class_string'];
-		$theSchool = "";
-		$theRank = "";
 		$theAccessLevel = $userInfoArray['access_id'];
+		if($theAccessLevel == 10) {
+			$theMajor = $userInfoArray2['major_string'];
+			$theClassification = $userInfoArray2['class_string'];
+			$theSchool = "";
+			$theRank = "";
+		}
+		if($theAccessLevel == 20) {
+			$theMajor = "";
+			$theClassification = "";
+			$theSchool = $userInfoArray2['school_string'];
+			$theRank = $userInfoArray2['rank_string'];
+		}
+		
 		//$user = new UserImpl($theFirstName, $theLastName, $theEmail, $theUsername, $thePassword, $theMajor, $theClassification, $theSchool, $theRank, $theAccessLevel);
 		
-		$user = array ('user_firstName' => $userInfoArray['user_firstName'], 'user_lastName' => $userInfoArray['user_lastName'], 'user_email' => $userInfoArray['user_email'], 'user_username' => $userInfoArray['user_username'], 'user_password' => $userInfoArray['user_password'], 'major_string' => $userInfoArray2['major_string'], 'class_string' => $userInfoArray2['class_string'], 'access_id' => $userInfoArray['access_id'], 'user_id' => $userInfoArray['user_id']);
+		$user = array ('user_firstName' => $theFirstName, 'user_lastName' => $theLastName, 'user_email' => $theEmail, 'user_username' => $theUsername, 'user_password' => $thePassword, 'major_string' => $theMajor, 'class_string' => $theClassification, 'access_id' => $theAccessLevel, 'user_id' => $userid, 'school_string' => $theSchool, 'rank_string' => $theRank);
 		
 		//$user2 = $this->load->library('UserImpl',$user);
 	

@@ -17,9 +17,6 @@
 		<button type="submit" class='btn btn-primary' formaction="/codeigniter/3339/index.php/login/validateLoginCredentials"> 
 			Log In 
 		</button>
-		<button type="submit" class='btn btn-primary' formaction="/codeigniter/3339/index.php/login/testing">
-			Run Test
-		</button>
 	</form>
 
 </div>

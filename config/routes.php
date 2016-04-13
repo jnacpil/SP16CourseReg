@@ -43,6 +43,7 @@ $route['login'] = "login/initialize";
 $route['initialize'] = "login/initialize";
 $route['validateLoginCredentials'] = "login/validateLoginCredentials";
 $route['home'] = "schedule/home";
+$route['searchResults'] = "schedule/searchResults";
 $route['404_override'] = '';
 
 

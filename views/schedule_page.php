@@ -2,17 +2,13 @@
 	<form method='post'>
 		<h4> Student Homepage 
 		
-		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/"> 
-			View Next Semester
+		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/search/init"> 
+			Search Courses
 		</button>
 		
-		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/"> 
-			Search Current Courses
-		</button>
-		
-		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/"> 
+		<!--<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/"> 
 			Search Course Catalog
-		</button>
+		</button>-->
 		
 		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/login/logout"> 
 			Log out
@@ -60,31 +56,39 @@
 </br>
 
 <div class='well'>  
-	   <h4> Current Semester's Courses </h4>
+	   <h4> <?php echo $courseInfo[0]['tp_name']." ".$courseInfo[0]['tp_year'];?> Courses </h4>
 	
 <table class='table table-hover-condensed'>
 		<thead>
 			<tr>
 				<th>Course</th>
 				<th>Course Name</th>
-				<th>Capacity</th>
-				<th>Registered</th>
 				<th>Instructor</th>
-				<th>Time</th>
 				<th>Days</th>
+				<th>Time</th>
+				<th>Drop</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach($courseInfo as $course)
 				{
 					echo "<tr>";
-					echo "<td>".$course['dept_id']." ".$course['course_number']."</td>"."\n";
-					echo "<td>".$course['course_name']."</td>"."\n";
-					echo "<td>"."</td>"."\n";
-					echo "<td>"."</td>"."\n";
-					echo "<td>".$course['user_id']."</td>"."\n";
-					echo "<td>".$course['ts_id']."</td>"."\n";
-					echo "<td>".$course['ts_id']."</td>"."\n";
+						echo "<td>".$course['dept_name']." ".$course['course_number']."</td>"."\n";
+						echo "<td>".$course['course_name']."</td>"."\n";
+						
+						
+						echo "<td>".$course['user_lastName']."</td>"."\n";
+						echo "<td>".$course['ts_daysOfWeek']."</td>"."\n";
+						echo "<td>".$course['ts_timeStart']." - ".$course['ts_timeEnd']."</td>"."\n";
+						
+						echo "<td>"."\n";
+							echo "<form method='post'>"."\n";
+							//echo "<input type='hidden' name='edit' value='".$row['Name']."'>"."\n";
+							echo "<button type='submit' class='btn btn-danger'"."\n";
+							echo " formaction=''>"."\n";
+							echo "<i class='fa fa-trash' aria-hidden='true'></i>"."\n";  
+							echo "</button>"."\n";
+							echo "</form>";
 					echo "</tr>";
 				}
 				?>
@@ -92,7 +96,7 @@
 </table>
 </div>
 <div class='well'>  
-	   <h4> Waitlisted Courses </h4>
+	   <h4> Next Semester's Courses </h4>
 	
 <table class='table table-hover-condensed'>
 		<thead>

@@ -7,8 +7,88 @@ class Search_model extends CI_Model {
 		$this->load->database();
 	}
 	
+	public function searchByCourseName($departmentName, $searchID){
+		
+		$courseNameArray = array($departmentName => $searchID);
+		$query = $this->db->get_where('Course', $courseNameArray);
+		$result = $query->result_array();
+		
+	}
 	
+	public function searchByCourseNumber($departmentName, $searchID){
+		
+		$courseNumberArray = array($departmentName => $searchID);
+		$query = $this->db->get_where('Course', $courseNumberArray);
+		$result = $query->result_array();
+	}
 	
+	public function searchByDepartmentName($departmentName, $searchID){
+		
+		$departmentNameArray = array($departmentName => $searchID);
+		$query = $this->db->get_where('Department', $departmentNameArray);
+		$result = $query->result_array();
+		
+	}
+	
+	public function searchByProfName($departmentName, $searchID){
+		
+		$profNameArray = array($departmentName => $searchID);
+		$query = $this->db->get_where('User', $profNameArray);
+		$result = $query->row_array();
+		//print_r($result);
+		$id = $result['user_id'];
+		//echo $id;
+		$result2 = $this->getCourseData($id);
+		return $result2;
+	}
+	
+	public function getCourseData($id)
+	{
+		$courseDataArray = array('user_id' => $id);
+		$courseArray = array();
+		
+		//get row from Section using sect_id from Student to Section table
+			$query2 = $this->db->get_where('Section', $courseDataArray);
+			$resultArray99 = $query2->result_array();
+			//print_r($resultArray99);
+			foreach($resultArray99 as $row)
+			{
+			//get row from Course using course_id from row pulled from Section 
+			$courID = $row['course_id'];
+			$courArray = array('course_id' => $courID);
+			$query3 = $this->db->get_where('Course', $courArray);
+			$resultArray3 = $query3->row_array();
+			
+			//get row from TimePeriod using tp_id from row pulled from Section ($resultArray99)
+			$timePerID = $row['tp_id'];
+			$tpArray = array('tp_id' => $timePerID);
+			$query4 = $this->db->get_where('TimePeriod', $tpArray);
+			$resultArray4 = $query4->row_array();
+			
+			//get row from TimeSlot using ts_id from row pulled from Section ($resultArray99)
+			$timeSlotID = $row['ts_id'];
+			$tsArray = array('ts_id' => $timeSlotID);
+			$query5 = $this->db->get_where('TimeSlot', $tsArray);
+			$resultArray5 = $query5->row_array();
+			
+			//get row from User using user_id from row pulled from Section ($resultArray99)
+			$instID = $row['user_id'];
+			$instArray = array('user_id' => $instID);
+			$query6 = $this->db->get_where('User', $instArray);
+			$resultArray6 = $query6->row_array();
+			
+			//get row from Department using dept_id from row pulled from Course ($resultArray3)
+			$courDepID = $resultArray3['dept_id'];
+			echo "HEREHEREHERE ".$courDepID;
+			$deptArray = array('dept_id' => $courDepID);
+			$query7 = $this->db->get_where('Department', $deptArray);
+			$resultArray7 = $query7->row_array(); 
+		
+			$courInfo = array_merge($resultArray3, $resultArray4, $resultArray5, $resultArray6, $resultArray7);
+			array_push($courseArray, $courInfo);
+			}
+			return $courseArray;
+	}
 }
 //end of class
 ?>

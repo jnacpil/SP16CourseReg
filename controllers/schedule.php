@@ -32,16 +32,24 @@ class Schedule extends CI_Controller {
 			
 			//get current schedule
 			$id = $valid['user_id'];
-			$result = $this->schedule_model->getStudentCurrentSched($id);
+			$accessLevel = $valid['access_id'];
+			$result = $this->schedule_model->getCurrentSched($id,$accessLevel);
 			print_r($result);
 			
 			$data['userInfo'] = $valid;
 			$data['courseInfo'] = $result;
-			//load views
-			$this->load->view('templates/header', $data);
-			$this->load->view('schedule_page',$data);
-			$this->load->view('templates/footer', $data);
 			
+			if($accessLevel == 10) {
+				//load views
+				$this->load->view('templates/header', $data);
+				$this->load->view('schedule_page',$data);
+				$this->load->view('templates/footer', $data);
+			}
+			else if($accessLevel == 20) {
+				$this->load->view('templates/header', $data);
+				$this->load->view('instructor_page',$data);
+				$this->load->view('templates/footer', $data);
+			}
 			//	COMMENT OUT ABOVE
 			// DELETE EVENTUALLY
 			// will use username from session array to call to
