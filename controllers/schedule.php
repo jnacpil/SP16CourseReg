@@ -13,6 +13,8 @@ class Schedule extends CI_Controller {
 		$this->load->model('schedule_model');
 		//load helper
 		$this->load->helper('url');
+		//load unit_test
+		$this->load->library('unit_test');
 	}
 		
 	public function home() {
@@ -63,6 +65,28 @@ class Schedule extends CI_Controller {
 			// same view file, just different display data
 			//buttons for dropping 
 		}
+	}
+	
+	function testing()
+	{
+	$valid = $this->session->userdata('userInfoObject');
+	$data['userInfo'] = $valid;
+	
+	$test = $data->getFirstName();
+	
+	$expected_result = $userInfo['firstName'];
+	
+	$test_name = 'Test getFirstName method';
+	
+	echo $this->unit->run($test, $expected_result, $test_name);
+	
+	$test2 = $data->getLastName();
+	
+	$expected_result2 = $userInfo['lastName'];
+	
+	$test_name2 = 'Test getLastName method';
+	
+	echo $this->unit->run($test2, $expected_result2, $test_name2);
 	}
 		
 				

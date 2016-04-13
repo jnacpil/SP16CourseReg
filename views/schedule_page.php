@@ -49,6 +49,13 @@
 		</h4>
 	</div>
 	
+	<div class = 'form-group'>
+		<h4>Test Cases</h4>
+		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/schedule/testing">
+		Testing
+		</button>
+	</div>
+	
 </br>
 </br>
 </br>
