@@ -18,7 +18,7 @@
 		<div class="form-group">
 		<label for="deptName">Search Criteria</label>
 		<select name="deptName" class="form-control">
-			<option selected="selected"> Select Field to Search</option>
+			<option value = '0' selected="selected"> Select Field to Search</option>
 			<option value = 'course_name'>Course Name</option>
         	<option value = 'course_number'>Course Number</option>
         	<option value = 'dept_name'>Department Name</option>
@@ -32,7 +32,11 @@
 <?php
 	
 	if(isset($listOfCourses)) {
-		echo print_r($listOfCourses);
+		if(count($listOfCourses) == 0) {
+			echo "<div class='alert alert-danger'><strong> Search Returned No Results, Please Try Another Keyword </strong>";
+		}
+		else {
+		//echo print_r($listOfCourses);
 		echo "<div class='well'>"; 
 		echo "<h4>Search Result Courses </h4>";
 	
@@ -49,8 +53,10 @@
 		echo "</tr>";
 		echo "</thead>";
 		echo "<tbody>";
+
 		foreach($listOfCourses as $course)
 		{
+			print_r($course);
 			echo "<tr>";
 			echo "<td>".$course['dept_name']." ".$course['course_number']."</td>"."\n";
 			echo "<td>".$course['course_name']."</td>"."\n";
@@ -61,15 +67,17 @@
 			
 			echo "<td>"."\n";
 			echo "<form method='post'>"."\n";
-			//echo "<input type='hidden' name='edit' value='".$row['Name']."'>"."\n";
+			echo "<input type='hidden' name='cour' value='".$course['sect_id']."'>"."\n";
+			echo "<input type='hidden' name='use' value='".$course['user_id']."'>"."\n";
 			echo "<button type='submit' class='btn btn-info'"."\n";
-			echo " formaction=''>"."\n";
+			echo " formaction='/codeigniter/3339/index.php/schedule/add'>"."\n";
 			echo "Add"."\n";  
 			echo "</button>"."\n";
 			echo "</form>";
 			echo "</tr>";
 		}		
 		echo "</tbody>";
+		}
 		echo "</table>";
 		echo "</div>";
 	}

@@ -141,7 +141,7 @@ class Login extends CI_Controller {
 			$theSchool = "";
 			$theRank = "";
 		}
-		if($theAccessLevel == 20) {
+		else if($theAccessLevel == 20) {
 			$theMajor = "";
 			$theClassification = "";
 			$theSchool = $userInfoArray2['school_string'];

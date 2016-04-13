@@ -58,8 +58,6 @@
 			<tr>
 				<th>Course</th>
 				<th>Course Name</th>
-				<th>Capacity</th>
-				<th>Registered</th>
 				<th>Instructor</th>
 				<th>Time</th>
 				<th>Days</th>
@@ -69,13 +67,15 @@
 			<?php foreach($courseInfo as $course)
 				{
 					echo "<tr>";
-					echo "<td>".$course['dept_id']." ".$course['course_number']."</td>"."\n";
-					echo "<td>".$course['course_name']."</td>"."\n";
-					echo "<td>"."</td>"."\n";
-					echo "<td>"."</td>"."\n";
-					echo "<td>".$course['user_id']."</td>"."\n";
-					echo "<td>".$course['ts_id']."</td>"."\n";
-					echo "<td>".$course['ts_id']."</td>"."\n";
+						echo "<td>".$course['dept_name']." ".$course['course_number']."</td>"."\n";
+						echo "<td>".$course['course_name']."</td>"."\n";
+						
+						
+						echo "<td>".$course['user_lastName']."</td>"."\n";
+						echo "<td>".$course['ts_daysOfWeek']."</td>"."\n";
+						echo "<td>".$course['ts_timeStart']." - ".$course['ts_timeEnd']."</td>"."\n";
+						
+						echo "<td>"."\n";
 					echo "</tr>";
 				}
 				?>

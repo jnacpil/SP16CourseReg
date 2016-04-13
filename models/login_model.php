@@ -20,7 +20,7 @@ class Login_model extends CI_Model {
 	
 	public function getUserSpecificInfo($userid,$accessLevel) {
 		$result = array();
-		if($accessLevel == 10) {
+		if($accessLevel == '10') {
 			//create array to query for username match
 			$usernameArray = array('user_id' => $userid);
 			//run query
@@ -44,7 +44,7 @@ class Login_model extends CI_Model {
 			
 			$result = array ('class_string' => $row3['class_string'], 'major_string' => $row2['major_string']);
 		}
-		if($accessLevel == 20) {
+		else if($accessLevel == '20') {
 			//get prof info	
 			//create array to query for username match
 			$usernameArray = array('user_id' => $userid);
@@ -67,7 +67,7 @@ class Login_model extends CI_Model {
 			//just get row nad return
 			$row3 = $query3->row_array();
 			
-			$result = array ('school_string' => $row3['school_string'], 'rank_string' => $row2['rank_string']);
+			$result = array ('school_string' => $row2['school_string'], 'rank_string' => $row3['rank_string']);
 
 		}
 		return $result;

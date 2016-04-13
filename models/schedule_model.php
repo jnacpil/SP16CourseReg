@@ -110,6 +110,17 @@ class Schedule_model extends CI_Model {
 		
 		return $courseArray;
 	}
+	
+	public function dropCourse($id, $sectID){
+		$this->db->where('user_id', $id);
+		$this->db->where('sect_id', $sectID); 
+		$this->db->delete('Attend');
+	}
+	
+	public function addCourse($id, $sectID) {
+		$data = array( 'user_id' => $id, 'sect_id' => $sectID); 
+		$this->db->insert('Attend', $data); 
+	}
 }
 //end of class
 ?>

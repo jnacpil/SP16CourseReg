@@ -13,7 +13,15 @@
 		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/login/logout"> 
 			Log out
 		</button>
-	
+		
+	</div>
+		<div class = 'form-group'>
+			<h4>Test Cases
+				<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/schedule/testing">
+					Testing
+				</button>
+		</div>
+
 		</h4>
 	</form>
 </div>	
@@ -47,13 +55,6 @@
 		<h4>Email:
 		<?php echo $userInfo['user_email']; ?>
 		</h4>
-	</div>
-	
-	<div class = 'form-group'>
-		<h4>Test Cases</h4>
-		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/schedule/testing">
-		Testing
-		</button>
 	</div>
 	
 </br>
@@ -90,9 +91,10 @@
 						
 						echo "<td>"."\n";
 							echo "<form method='post'>"."\n";
-							//echo "<input type='hidden' name='edit' value='".$row['Name']."'>"."\n";
+							echo "<input type='hidden' name='cour' value='".$course['sect_id']."'>"."\n";
+							echo "<input type='hidden' name='use' value='".$userInfo['user_id']."'>"."\n";
 							echo "<button type='submit' class='btn btn-danger'"."\n";
-							echo " formaction=''>"."\n";
+							echo " formaction='/codeigniter/3339/index.php/schedule/drop'>"."\n";
 							echo "<i class='fa fa-trash' aria-hidden='true'></i>"."\n";  
 							echo "</button>"."\n";
 							echo "</form>";

@@ -15,6 +15,7 @@ class Schedule extends CI_Controller {
 		$this->load->helper('url');
 		//load unit_test
 		$this->load->library('unit_test');
+
 	}
 		
 	public function home() {
@@ -30,13 +31,13 @@ class Schedule extends CI_Controller {
 			//get user information
 			//$usernameArray = array ('username' => $valid);
 			//$result = $this->schedule_model->getPersonalInfo($usernameArray);
-			print_r($valid);
+			//print_r($valid);
 			
 			//get current schedule
 			$id = $valid['user_id'];
 			$accessLevel = $valid['access_id'];
 			$result = $this->schedule_model->getCurrentSched($id,$accessLevel);
-			print_r($result);
+			//print_r($result);
 			
 			$data['userInfo'] = $valid;
 			$data['courseInfo'] = $result;
@@ -66,29 +67,44 @@ class Schedule extends CI_Controller {
 			//buttons for dropping 
 		}
 	}
+		
+	public function drop() {
+		$sectID = $this->input->post('cour');
+		$userID = $this->input->post('use');
+		$this->schedule_model->dropCourse($userID,$sectID);
+		redirect('schedule/home');
+	}
 	
+	public function add() {
+		$sectID = $this->input->post('cour');
+		$userID = $this->input->post('use');
+		$this->schedule_model->addCourse($userID,$sectID);
+		redirect('schedule/home');
+	}
+	
+		
 	function testing()
 	{
 	$valid = $this->session->userdata('userInfoObject');
 	$data['userInfo'] = $valid;
 	
-	$test = $data->getFirstName();
+	$test = $valid['user_firstName'];
 	
-	$expected_result = $userInfo['firstName'];
+	$expected_result = "Patrick";
 	
 	$test_name = 'Test getFirstName method';
 	
 	echo $this->unit->run($test, $expected_result, $test_name);
 	
-	$test2 = $data->getLastName();
+	//$test2 = $data->getLastName();
 	
-	$expected_result2 = $userInfo['lastName'];
+	//$expected_result2 = $userInfo['lastName'];
 	
-	$test_name2 = 'Test getLastName method';
+	//$test_name2 = 'Test getLastName method';
 	
-	echo $this->unit->run($test2, $expected_result2, $test_name2);
+	//echo $this->unit->run($test2, $expected_result2, $test_name2);
 	}
-		
+
 				
 }
 //end of class
