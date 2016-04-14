@@ -107,7 +107,6 @@ class Schedule_model extends CI_Model {
 			$courInfo = array_merge($resultArray2, $resultArray3);
 			array_push($courseArray, $courInfo);
 		}
-		
 		return $courseArray;
 	}
 	
@@ -118,8 +117,19 @@ class Schedule_model extends CI_Model {
 	}
 	
 	public function addCourse($id, $sectID) {
-		$data = array( 'user_id' => $id, 'sect_id' => $sectID); 
+		$result = $this->checkIfStudentAlreadyEnrolled($id,$sectID);
+		if(count($result) != 0) {
+			return;
+		}
+		$data = array('sect_id' => $sectID, 'user_id' => $id); 
 		$this->db->insert('Attend', $data); 
+	}
+	
+	public function checkIfStudentAlreadyEnrolled($id,$secID) {
+		$data2 = array( 'user_id' => $id, 'sect_id' => $secID); 
+		$query2 = $this->db->get_where('Attend', $data2);
+		$resultArray2 = $query2->row_array();
+		return $resultArray2;
 	}
 }
 //end of class

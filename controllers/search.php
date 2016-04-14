@@ -24,6 +24,8 @@ class Search extends CI_Controller {
 	}
 	
 	public function searchResults(){
+		$valid = $this->session->userdata('userInfoObject');
+		$data['userInfo'] = $valid;
 		$data['title'] = 'Welcome to the University Registration System';
 		//if($this->input->post('deptName') != "" && $this->input->post('searchID') != "" && $this->input->post('searchID') != 0) {
 			$departmentName = $this->input->post('deptName');

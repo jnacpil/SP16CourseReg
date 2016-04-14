@@ -78,6 +78,7 @@ class Schedule extends CI_Controller {
 	public function add() {
 		$sectID = $this->input->post('cour');
 		$userID = $this->input->post('use');
+		echo "HERHERHE".$sectID." suer:  ".$userID;
 		$this->schedule_model->addCourse($userID,$sectID);
 		redirect('schedule/home');
 	}

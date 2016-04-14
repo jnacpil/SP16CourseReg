@@ -33,6 +33,7 @@ class Search_model extends CI_Model {
 		$query = $this->db->get_where('Department', $departmentNameArray);
 		$result = $query->row_array();
 		$result2 = $this->getCourseDataByDept($result);
+		print_r($result2);
 		return $result2;
 		
 	}
@@ -91,7 +92,8 @@ class Search_model extends CI_Model {
 			$query7 = $this->db->get_where('Department', $deptArray);
 			$resultArray7 = $query7->row_array(); 
 		
-			$courInfo = array_merge($resultArray3, $resultArray4, $resultArray5, $resultArray6, $resultArray7);
+		$sessarr = array('sect_id' => $row['sect_id']);
+			$courInfo = array_merge($resultArray3, $resultArray4, $resultArray5, $resultArray6, $resultArray7,$sessarr);
 			array_push($courseArray, $courInfo);
 			}
 			return $courseArray;
@@ -137,7 +139,8 @@ class Search_model extends CI_Model {
 			$query7 = $this->db->get_where('Department', $deptArray);
 			$resultArray7 = $query7->row_array(); 
 		
-			$courInfo = array_merge($resultArray3, $resultArray4, $resultArray5, $resultArray6, $resultArray7);
+		$sessarr = array('sect_id' => $row['sect_id']);
+			$courInfo = array_merge($resultArray3, $resultArray4, $resultArray5, $resultArray6, $resultArray7,$sessarr);
 			array_push($courseArray, $courInfo);
 			}
 			return $courseArray;
@@ -190,7 +193,8 @@ class Search_model extends CI_Model {
 			$query7 = $this->db->get_where('Department', $deptArray);
 			$resultArray7 = $query7->row_array(); 
 		
-			$courInfo = array_merge($resultArray3, $resultArray4, $resultArray5, $resultArray6, $resultArray7);
+			$sessarr = array('sect_id' => $row2['sect_id']);
+			$courInfo = array_merge($resultArray3, $resultArray4, $resultArray5, $resultArray6, $resultArray7,$sessarr);
 			array_push($courseArray, $courInfo);
 			}
 			return $courseArray;	

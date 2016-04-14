@@ -2,27 +2,23 @@
 	<form method='post'>
 		<h4> Student Homepage 
 		
-		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/search/init"> 
-			Search Courses
+		<button type="submit" class='btn btn-info' formaction="/codeigniter/3339/index.php/search/init"> 
+			<i class="fa fa-search" aria-hidden="true">Search Courses</i>
 		</button>
 		
 		<!--<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/"> 
 			Search Course Catalog
 		</button>-->
 		
-		<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/login/logout"> 
-			Log out
+		<button type="submit" class='btn btn-success' formaction="/codeigniter/3339/index.php/schedule/testing">
+			<i class="fa fa-check" aria-hidden="true">Run Test Cases</i>
 		</button>
 		
+		<button type="submit" class='btn btn-primary' formaction="/codeigniter/3339/index.php/login/logout"> 
+			Log out
+		</button>
 	</div>
-		<div class = 'form-group'>
-			<h4>Test Cases
-				<button type="submit" class='btn btn-default' formaction="/codeigniter/3339/index.php/schedule/testing">
-					Testing
-				</button>
-		</div>
-
-		</h4>
+		
 	</form>
 </div>	
 	
@@ -64,7 +60,14 @@
 </br>
 
 <div class='well'>  
-	   <h4> <?php echo $courseInfo[0]['tp_name']." ".$courseInfo[0]['tp_year'];?> Courses </h4>
+	   <h4> <?php 
+		   if(count($courseInfo) == 0) {
+					echo "<div class='alert alert-danger'><strong> Not Currently Taking Any Courses </strong>";
+				}
+				else {
+		   echo $courseInfo[0]['tp_name']." ".$courseInfo[0]['tp_year'];
+		   }
+		   ?> Courses </h4>
 	
 <table class='table table-hover-condensed'>
 		<thead>
@@ -78,7 +81,11 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach($courseInfo as $course)
+			<?php 
+				if(count($courseInfo) == 0) {
+				}
+				else {
+				foreach($courseInfo as $course)
 				{
 					echo "<tr>";
 						echo "<td>".$course['dept_name']." ".$course['course_number']."</td>"."\n";
@@ -99,6 +106,7 @@
 							echo "</button>"."\n";
 							echo "</form>";
 					echo "</tr>";
+				}
 				}
 				?>
 		</tbody>

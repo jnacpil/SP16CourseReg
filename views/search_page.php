@@ -1,9 +1,22 @@
 <div class = 'page-header'>
 	<form method ='post'>
-		<h4> Search Courses Page
-			<button type = "submit" class = 'btn btn-default' formaction = "/codeigniter/3339/index.php/schedule/home">
-				Back
-			</button>
+		<h4> 
+			<?php if($userInfo['access_id'] == 10) {
+					echo "Search Courses Page";
+					echo "<button type = 'submit' class = 'btn btn-default' formaction = '/codeigniter/3339/index.php/schedule/home'>";
+					echo "Back";
+					echo "</button>";
+				}
+				else if($userInfo['access_id'] == 30){
+					echo "Regisrar Homepage";
+					echo "<button type = 'submit' class = 'btn btn-default' formaction = '/codeigniter/3339/index.php/schedule/createCourseForm'>";
+					echo "Create Course";
+					echo "</button>";
+				}
+				?>
+			<button type="submit" class='btn btn-primary' formaction="/codeigniter/3339/index.php/login/logout"> 
+			Log out
+		</button>
 		</h4>
 	</form>
 </div>
@@ -56,7 +69,7 @@
 
 		foreach($listOfCourses as $course)
 		{
-			print_r($course);
+			
 			echo "<tr>";
 			echo "<td>".$course['dept_name']." ".$course['course_number']."</td>"."\n";
 			echo "<td>".$course['course_name']."</td>"."\n";
@@ -68,7 +81,7 @@
 			echo "<td>"."\n";
 			echo "<form method='post'>"."\n";
 			echo "<input type='hidden' name='cour' value='".$course['sect_id']."'>"."\n";
-			echo "<input type='hidden' name='use' value='".$course['user_id']."'>"."\n";
+			echo "<input type='hidden' name='use' value='".$userInfo['user_id']."'>"."\n";
 			echo "<button type='submit' class='btn btn-info'"."\n";
 			echo " formaction='/codeigniter/3339/index.php/schedule/add'>"."\n";
 			echo "Add"."\n";  
