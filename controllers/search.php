@@ -24,35 +24,39 @@ class Search extends CI_Controller {
 	}
 	
 	public function searchResults(){
+		$valid = $this->session->userdata('userInfoObject');
+		$data['userInfo'] = $valid;
 		$data['title'] = 'Welcome to the University Registration System';
-		$departmentName = $this->input->post('deptName');
-		$searchID = $this->input->post('searchID');
-		//echo $departmentName;
-		//echo $searchID;
-		$result = array();
-		if($departmentName == 'course_name')
-		{
-			$result = $this->search_model->searchByCourseName($departmentName, $searchID);
-		}
-		if($departmentName == 'course_number')
-		{
-			$result = $this->search_model->searchByCourseNumber($departmentName, $searchID);
-		}
-		if($departmentName == 'dept_name')
-		{
-			$result = $this->search_model->searchByDepartmentName($departmentName, $searchID);
-		}
-		if($departmentName == 'user_lastName')
-		{
-			$result = $this->search_model->searchByProfName($departmentName, $searchID);
-			//print_r($result);
-		}
+		//if($this->input->post('deptName') != "" && $this->input->post('searchID') != "" && $this->input->post('searchID') != 0) {
+			$departmentName = $this->input->post('deptName');
+			$searchID = $this->input->post('searchID');
+			//echo $departmentName;
+			//echo $searchID;
+			$result = array();
+			if($departmentName == 'course_name')
+			{
+				echo $departmentName." ".$searchID;
+				$result = $this->search_model->searchByCourseName($departmentName, $searchID);
+			}
+			if($departmentName == 'course_number')
+			{
+				$result = $this->search_model->searchByCourseNumber($departmentName, $searchID);
+			}
+			if($departmentName == 'dept_name')
+			{
+				$result = $this->search_model->searchByDepartmentName($departmentName, $searchID);
+			}
+			if($departmentName == 'user_lastName')
+			{
+				$result = $this->search_model->searchByProfName($departmentName, $searchID);
+				//print_r($result);
+			}
 		
-		$data['listOfCourses'] = $result;
-		
-		$this->load->view('templates/header', $data);
-		$this->load->view('search_page', $data);
-		$this->load->view('templates/footer', $data);
+			$data['listOfCourses'] = $result;
+		//}
+			$this->load->view('templates/header', $data);
+			$this->load->view('search_page', $data);
+			$this->load->view('templates/footer', $data);
 	}
 
 

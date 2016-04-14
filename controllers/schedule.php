@@ -13,6 +13,9 @@ class Schedule extends CI_Controller {
 		$this->load->model('schedule_model');
 		//load helper
 		$this->load->helper('url');
+		//load unit_test
+		$this->load->library('unit_test');
+
 	}
 		
 	public function home() {
@@ -28,13 +31,13 @@ class Schedule extends CI_Controller {
 			//get user information
 			//$usernameArray = array ('username' => $valid);
 			//$result = $this->schedule_model->getPersonalInfo($usernameArray);
-			print_r($valid);
+			//print_r($valid);
 			
 			//get current schedule
 			$id = $valid['user_id'];
 			$accessLevel = $valid['access_id'];
 			$result = $this->schedule_model->getCurrentSched($id,$accessLevel);
-			print_r($result);
+			//print_r($result);
 			
 			$data['userInfo'] = $valid;
 			$data['courseInfo'] = $result;
@@ -65,6 +68,62 @@ class Schedule extends CI_Controller {
 		}
 	}
 		
+	public function drop() {
+		$sectID = $this->input->post('cour');
+		$userID = $this->input->post('use');
+		$this->schedule_model->dropCourse($userID,$sectID);
+		redirect('schedule/home');
+	}
+	
+	public function add() {
+		$sectID = $this->input->post('cour');
+		$userID = $this->input->post('use');
+		echo "HERHERHE".$sectID." suer:  ".$userID;
+		$this->schedule_model->addCourse($userID,$sectID);
+		redirect('schedule/home');
+	}
+	
+		
+	function testing()
+	{
+	$valid = $this->session->userdata('userInfoObject');
+	$data['userInfo'] = $valid;
+	
+	// $test = $valid['user_firstName'];
+// 	
+// 	$expected_result = "Patrick";
+// 	
+// 	$test_name = 'Test getFirstName method';
+// 	
+// 	echo $this->unit->run($test, $expected_result, $test_name);
+// 	
+	$testArray = Array
+	(
+	Array($valid['user_firstName'], "Patrick", "Test getFirstName method"),
+	Array($valid['user_lastName'], "Navarro", "Test getLastName method"),
+	Array($valid['user_accessLevel'], 10, "Test if User is student"),
+	Array($valid['user_accessLevel'], 99, "Test if User is instructor"),
+	Array($valid['user_accessLevel'], 30, "Test if User is registrar")
+	);
+	
+	for(int i = 0; i < 5; i++)
+	{
+	$test = $testArray[i][0];
+	$expected_result = $testArray[i][1];
+	$test_name = $testArray[i][2];
+	$this->unit->run($test, $expected_result, $test_name);
+	}
+	echo $this->unit->report();
+	
+	//$test2 = $data->getLastName();
+	
+	//$expected_result2 = $userInfo['lastName'];
+	
+	//$test_name2 = 'Test getLastName method';
+	
+	//echo $this->unit->run($test2, $expected_result2, $test_name2);
+	}
+
 				
 }
 //end of class
