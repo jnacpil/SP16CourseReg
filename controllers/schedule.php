@@ -88,13 +88,31 @@ class Schedule extends CI_Controller {
 	$valid = $this->session->userdata('userInfoObject');
 	$data['userInfo'] = $valid;
 	
-	$test = $valid['user_firstName'];
+	// $test = $valid['user_firstName'];
+// 	
+// 	$expected_result = "Patrick";
+// 	
+// 	$test_name = 'Test getFirstName method';
+// 	
+// 	echo $this->unit->run($test, $expected_result, $test_name);
+// 	
+	$testArray = Array
+	(
+	Array($valid['user_firstName'], "Patrick", "Test getFirstName method"),
+	Array($valid['user_lastName'], "Navarro", "Test getLastName method"),
+	Array($valid['user_accessLevel'], 10, "Test if User is student"),
+	Array($valid['user_accessLevel'], 99, "Test if User is instructor"),
+	Array($valid['user_accessLevel'], 30, "Test if User is registrar")
+	);
 	
-	$expected_result = "Patrick";
-	
-	$test_name = 'Test getFirstName method';
-	
-	echo $this->unit->run($test, $expected_result, $test_name);
+	for(int i = 0; i < 5; i++)
+	{
+	$test = $testArray[i][0];
+	$expected_result = $testArray[i][1];
+	$test_name = $testArray[i][2];
+	$this->unit->run($test, $expected_result, $test_name);
+	}
+	echo $this->unit->report();
 	
 	//$test2 = $data->getLastName();
 	
