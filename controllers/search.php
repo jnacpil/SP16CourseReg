@@ -58,7 +58,15 @@ class Search extends CI_Controller {
 			$this->load->view('search_page', $data);
 			$this->load->view('templates/footer', $data);
 	}
-
+	public function courseDetails()
+	{
+		$sectID = $this->input->post('section');
+		$result1 = $this->schedule_model->getSectionDetails($sectID);
+		$result2 =$this->search_model->getCourseRoster($sectID);
+		$data['sectionDetails']=result1;
+		$data['courseRoster']=result2;
+		$this->load->view('course_page', $data);
+	}
 
 
 }
