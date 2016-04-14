@@ -147,7 +147,8 @@ class Search_model extends CI_Model {
 
 	}
 	
-	public function getCourseDataByDept($arr6) {
+	public function getCourseDataByDept($arr6) 
+	{
 			$courseArray = array();
 			$arr2 = array('dept_id' => $arr6['dept_id']);
 			$query2 = $this->db->get_where('Course', $arr2);
@@ -199,7 +200,34 @@ class Search_model extends CI_Model {
 			}
 			return $courseArray;	
 			}
+	}
+	
+	public function getCourseRoster($sectID)
+	{
+		$sectArray = array('sect_id' => $sectID);
+			$query = $this->db->get_where('Attend', $sectArray);
+			$resultArray = $query->result_array();
+			
+			$studentArray = array();
+			
+			foreach($resultArray as $row)
+			{
+				$userID = $row['user_id'];
+				$userArray = array('user_id' => $userID);
+				$query1 = this->db->get_where('User', $userArray);
+				$resultArray1 = $query1->row_array();
+				
+				$query2 = this->db->get_where('Student', $userArray);
+				$resultArray2 = $query2->row_array();
+				
+				$studInfo = array_merge($resultArray1, $resultArray2);
+				array_push($studentArray, $studInfo);
+				
 			}
+			return $studentArray;
+			
+	}
+	
 	
 }
 //end of class
