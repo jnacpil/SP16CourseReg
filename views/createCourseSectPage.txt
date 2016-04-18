@@ -1,0 +1,183 @@
+
+//Search Module
+<div class = 'page-header'>
+	<form method ='post'>
+		<h4> Create Course
+			<button type = "submit" class = 'btn btn-default' formaction = "/codeigniter/3339/index.php/search/init">
+				Back
+			</button>
+		</h4>
+	</form>
+</div>
+
+<form class="form-horizontal">
+
+
+  //Department Name Field
+  //
+	<div class="form-group">
+		<label for="deptName">Department Name</label>
+		<div class="col-xs-4">
+		<select id="deptName" class="form-control">
+			<option>option 1</option>
+        	<option>option 2</option>
+        	<option>option 3</option>
+        	<option>option 4</option>
+        	<option>option 5</option>
+      	</select>
+      	</div>
+    </div>
+   
+  
+  //Course Name Field
+    //
+	<div class="form-group">
+    	<label for="courseName" class="col-sm-2 control-label">Course Name</label>
+    	<div class="col-xs-2">
+      		<input type="text" class="form-control" id="courseName" placeholder="">
+    	</div>
+  	</div>
+   
+    //Course Number Field
+    //
+	<div class="form-group">
+    	<label for="courseNum" class="col-sm-2 control-label">Course Number</label>
+    	<div class="col-xs-2">
+      		<input type="text" class="form-control" id="courseNum" placeholder="">
+    	</div>
+  	</div>
+  
+  	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+      		<button type="submit" class="btn btn-default">Submit</button>
+    	</div>
+  	</div>
+</form>
+  
+  
+  /////
+  
+<div class = 'page-header'>
+	<form method ='post'>
+		<h4> Create Section
+			<button type = "submit" class = 'btn btn-default' formaction = "/codeigniter/3339/index.php/search/init">
+				Back
+			</button>
+		</h4>
+	</form>
+</div>
+
+<form class="form-horizontal">
+    //Select Course Field
+    <div class="form-group">
+    	<label for="schoolSelect">Course Name</label>
+    	<div class="col-xs-2">
+    	<select id="courseSelect" class="form-control">
+        	<option>option 1</option>
+       		<option>option 2</option>
+        	<option>option 3</option>
+        	<option>option 4</option>
+        	<option>option 5</option>
+      	</select>
+      	</div>
+    </div>
+    
+  
+       //Instructor Name field
+    //
+    <div class="form-group">
+    	<label for="instName">Course Name</label>
+    	<div class="col-xs-2">
+    	<select id="courseName" class="form-control">
+        	<option>option 1</option>
+       		<option>option 2</option>
+        	<option>option 3</option>
+        	<option>option 4</option>
+        	<option>option 5</option>
+      	</select>
+      	</div>
+    </div>
+ 
+    
+    
+    //radios
+    <div class="form-group">
+    
+    
+    	//Semester Field
+   		//
+    	<label for="semSelect" class="col-sm-2 control-label">Semester</label>
+    	<div class="col-sm-offset-2 col-sm-10">
+    		<div class="radio">
+  				<label>
+    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+    				Spring 2015
+  				</label>
+			</div>
+		</div>
+
+
+		<div class="col-sm-offset-2 col-sm-10">
+			<div class="radio">
+				<label>
+    				<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+   					Fall 2016
+  				</label>
+			</div>
+		</div>
+
+		//Scheduled Days Field 
+		//
+		
+		<label for="daysSelect" class="col-sm-2 control-label">Days</label>
+		<div class="col-sm-offset-2 col-sm-10">
+			<div class="radio">
+ 				<label>
+    				<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+    				MWF
+  				</label>
+			</div>
+		</div>
+
+		<div class="col-sm-offset-2 col-sm-10">
+			<div class="radio">
+				<label>
+					<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+    				TTh
+  				</label>
+			</div>
+		</div>
+    
+    </div>
+
+    //Scheduled Time Field
+    //
+    <div class="form-group">
+    	<label for="scheTimes">Scheduled Times</label>
+    	<div class="col-xs-2">
+      	<select id="scheTimes" class="form-control">
+        	<option>8:00 am - 8:50 am </option>
+        	<option>9:00 am - 9:50 am </option>
+        	<option>10:00 am - 10:50 am </option>
+        	<option>11:00 am - 11:50 am </option>
+        	<option>12:00 pm - 12:50 pm </option>
+        	<option>1:00 pm - 1:50 pm </option>
+        	<option>8:00 am - 9:15 am </option>
+        	<option>9:30 am - 10:45 am </option>
+        	<option>11:00 am - 12:15 pm </option>
+        	<option>12:30 pm - 1:45 pm </option>
+        	<option>2:00 pm - 3:15 pm </option>
+        	<option>3:30 pm - 4:45 pm </option>
+        	<option>5:00 pm - 6:15 pm </option>
+      	</select>
+      	</div>
+    </div>
+    
+    //Search button 
+    //
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+      		<button type="submit" class="btn btn-default">Submit</button>
+    	</div>
+  	</div>
+</form>
