@@ -1,0 +1,27 @@
+INSERT INTO `User` VALUES (7 , 'Albert' , 'Laplutz' , 'alaplutz@univ.edu' , 'alaplutz' , '' , 99),
+INSERT INTO `User` VALUES (8 , 'Michael' , 'Morrelson', 'mmorrelson@univ.edu', 'mmorrelson' , '' , 99),
+INSERT INTO `User` VALUES (9 , 'James' , 'Wilson' , 'jwilson@univ.edu' , 'jwilson' , '', 99),
+INSERT INTO `User` VALUES (10 , 'Greg' , 'Martin' , 'gmartin@univ.edu' , 'gmartin' , '' , 20),
+INSERT INTO `User` VALUES (11 , 'Grant' , 'Powers' , 'gpowers@univ.edu' , 'gpowers' , '' , 30),
+INSERT INTO `User` VALUES (12 , 'Joocy' , 'Jay' , 'jjay@univ.edu' , 'jjay' , '' , 10),
+INSERT INTO `User` VALUES (13 , 'Robert' , 'Fripp' , 'rfripp@univ.edu' , 'rfripp' , '' , 20),
+INSERT INTO `User` VALUES (14 , 'Jackie' , 'Canberra' , 'jcanberra@univ.edu' , 'jcanberra' , '' , 10),
+INSERT INTO `User` VALUES (15 , 'Alyx' , 'Bloodstone' , 'abloodstone@univ.edu', 'abloodstone' , '' ,30);
+
+INSERT INTO `Course` VALUES (4 , 'Linear Algebra' , '3305' , 'Upper-level math course that teaches students matrix algebra and how to work with systems of linear equations' , '4'),
+INSERT INTO `Course` VALUES (5 , 'Calculus' , '2203' , 'Lower-level math course that involves limits and derivatives' , '4'),
+INSERT INTO `Course` VALUES (6 , 'Business Ethics' , '2325' , 'Lower-level business course that teaches the students how to ethically behave in a business environment' , '3'),
+INSERT INTO `Course` VALUES (7 , 'American Experience' , '2336' , 'Lower-level culture course that discusses the foundations of problems in America' , '2'),
+INSERT INTO `Course` VALUES (8 , 'American Dilemmas' , '2337' , 'Upper-level culture course that continues the discussions started in American Experience' , '2'),
+INSERT INTO `Course` VALUES (9 , 'CS Concepts I' , '1311' , 'Lower-level computer science course that lays a foundation for upper-level work', '1'),
+INSERT INTO `Course` VALUES (10, 'CS Concepts II' , '2311' , 'Lower-level computer science course that continues the groundwork of Concepts I' , '1');
+
+INSERT INTO `Major` VALUES (7, 'Psychology'),
+INSERT INTO `Major` VALUES (8, 'Communications'),
+INSERT INTO `Major` VALUES (9, 'Art'),
+INSERT INTO `Major` VALUES (10, 'Graphic Design'),
+INSERT INTO `Major` VALUES (11, 'Biology'),
+INSERT INTO `Major` VALUES (12, 'Chemistry'),
+INSERT INTO `Major` VALUES (13, 'Physics'),
+INSERT INTO `Major` VALUES (14, 'English'),
+INSERT INTO `Major` VALUES (15, 'Political Science');
